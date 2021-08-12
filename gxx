@@ -1,0 +1,18 @@
+#!/bin/sh
+
+git rev-list -1 HEAD > /dev/null 2>&1 
+if [ $? -eq 0 ]; then
+    export GIT_COMMIT=$(git describe --dirty --always)
+    export BUILD_TIME=$(date "+%F %T")
+    export GO_VERSION=$(go version)
+else
+    echo "fail"
+fi
+
+gox -ldflags                                                            \
+    "                                                                   \
+    -X 'github.com/lifeng1992/build_info.gitCommit=${GIT_COMMIT}'       \
+    -X 'github.com/lifeng1992/build_info.buildTime=${BUILD_TIME}'       \
+    -X 'github.com/lifeng1992/build_info.goVersion=${GO_VERSION}'       \
+    "                                                                   \
+    $@

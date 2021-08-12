@@ -9,11 +9,11 @@ type info struct {
 }
 
 var (
-	gitCommit string
-	goVersion string
-	os        string
-	arch      string
-	buildTime string
+	gitCommit = "unknown"
+	goVersion = "unknown"
+	os        = "unknown"
+	arch      = "unknown"
+	buildTime = "unknown"
 )
 
 func Info() info {
